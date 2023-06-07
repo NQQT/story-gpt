@@ -1,8 +1,9 @@
 const path = require('path');
-const HtmlWebPackPlugin = require('html-webpack-plugin');
+const HtmlWebpackPlugin = require('html-webpack-plugin');
 const TsconfigPathsPlugin = require('tsconfig-paths-webpack-plugin');
 
 module.exports = {
+  entry: './src/index.js',
   output: {
     path: path.resolve(__dirname, 'build'),
     filename: 'bundle.js',
@@ -37,8 +38,17 @@ module.exports = {
     ],
   },
   plugins: [
-    new HtmlWebPackPlugin({
-      template: './public/index.html',
+    new HtmlWebpackPlugin({
+      template: './src/index.html',
+      filename: 'index.html',
+      minify: {
+        collapseWhitespace: true,
+        removeComments: true,
+        removeRedundantAttributes: true,
+        removeScriptTypeAttributes: true,
+        removeStyleLinkTypeAttributes: true,
+        useShortDoctype: true,
+      },
     }),
   ],
 };

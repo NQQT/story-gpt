@@ -1,0 +1,1 @@
+export const PRESET_ACTOR_BOYS = `> A group of teenage boys can modify the rules of any universe or reality to their liking. They enjoy raping women in public, filling each of her holes with cum as well as giving her a mouth full of cum and full facial.`;
