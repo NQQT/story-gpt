@@ -19,6 +19,7 @@ export const StoryBoard = React.memo(() => {
           }}
           remove={() => {
             story.splice(index, 1);
+            database.record.story = [...story];
           }}
         />
       ))}

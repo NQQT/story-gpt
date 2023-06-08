@@ -17,11 +17,15 @@ export const GenerateStoryButton = React.memo(() => {
         // PRESET_ACTOR_BOYS,
         // PRESET_INSTRUCT_IGNORED
       );
+
       deepAI.append(`> The story summary is as follow: ${database.story.setting}`);
 
       if (database.record.story.length) {
         deepAI.append('> The story so far:');
         deepAI.append(...getTruncatedStory());
+      }
+
+      if (database.record.story.length) {
         // Adding Instruction to Continue
         deepAI.append(`> ${database.story.instruction}`);
       } else {
