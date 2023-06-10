@@ -81,12 +81,18 @@ const validEndingString = (text: string) => {
 const getTruncatedStory = () => {
   const maxLength = 20000;
   const story = [...database.record.story];
-  story.reverse();
   let counter = 0;
   // Get the filtered story
-  const truncatedStory = story.filter((entry) => {
+  const truncatedStory = story.reverse().filter((entry) => {
+    const valid = counter < maxLength;
     counter += entry.length;
-    return counter < maxLength;
+    return valid;
   });
+  if (truncatedStory.length !== story.length) {
+    truncatedStory.push('...');
+    truncatedStory.push('...');
+    truncatedStory.push('...');
+    truncatedStory.push(story[story.length - 1]);
+  }
   return truncatedStory.reverse();
 };
