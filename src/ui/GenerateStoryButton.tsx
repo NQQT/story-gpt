@@ -70,7 +70,7 @@ export const GenerateStoryButton = React.memo(() => {
 const validEndingString = (text: string) => {
   if (text.indexOf('\n') > 0) {
     const trimmed = text.trim();
-    if (trimmed[trimmed.length - 1] === '.') {
+    if (['"', '.'].includes(trimmed[trimmed.length - 1])) {
       // Ending must be a full stop
       return true;
     }
@@ -92,7 +92,7 @@ const getTruncatedStory = () => {
     truncatedStory.push('...');
     truncatedStory.push('...');
     truncatedStory.push('...');
-    truncatedStory.push(story[story.length - 1]);
+    // truncatedStory.push(story[story.length - 1]);
   }
   return truncatedStory.reverse();
 };

@@ -1,5 +1,6 @@
 /** @type { import('@storybook/react').Preview } */
-const preview = {
+
+export default {
   parameters: {
     actions: { argTypesRegex: '^on[A-Z].*' },
     controls: {
@@ -10,5 +11,3 @@ const preview = {
     },
   },
 };
-
-export default preview;

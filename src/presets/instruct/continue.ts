@@ -1,1 +1,1 @@
-export const PRESET_INSTRUCT_CONTINUE = `Continue the story. Stick to the story summary and describe each point in full unfiltered details. Include dialogues from every character and never summarize their dialogues or actions. Give me the first 700 words.`;
+export const PRESET_INSTRUCT_CONTINUE = `Continue the the story. Stick to the story summary and drawl out each point in full unfiltered details. Include dialogues from every character and never summarize their dialogues or actions. Describe everything in granular details. Give me the first 700 words.`;

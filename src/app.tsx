@@ -6,6 +6,7 @@ import { StorySummaryTextField } from './ui/StorySummaryTextField';
 import { GenerateStoryButton } from './ui/GenerateStoryButton';
 import { StoryBoard } from './ui/StoryBoard';
 import { StoryInstructionTextField } from './ui/StoryInstructionTextField';
+import { CopyStoryButton } from './ui/CopyStoryButton';
 
 const drawerWidth = 400;
 export const StoryGPTMain = () => {
@@ -28,30 +29,38 @@ export const StoryGPTMain = () => {
           <StorySummaryTextField />
           <StoryBoard />
           <StoryInstructionTextField />
-          <GenerateStoryButton />
+          <Box>
+            <CopyStoryButton />
+            <GenerateStoryButton />
+          </Box>
         </Box>
-        <Drawer
-          sx={{
-            width: drawerWidth,
-            flexShrink: 0,
-            '& .MuiDrawer-paper': {
-              width: drawerWidth,
-              boxSizing: 'border-box',
-            },
-          }}
-          variant="permanent"
-          anchor="right"
-        >
-          <Toolbar>
-            <Typography variant="h6" noWrap component="div">
-              Statistic
-            </Typography>
-          </Toolbar>
-          <TokenCounterAccordian />
-          <Divider />
-          <Divider />
-        </Drawer>
       </Box>
     </>
+  );
+};
+
+export const DrawerItem = () => {
+  return (
+    <Drawer
+      sx={{
+        width: drawerWidth,
+        flexShrink: 0,
+        '& .MuiDrawer-paper': {
+          width: drawerWidth,
+          boxSizing: 'border-box',
+        },
+      }}
+      variant="permanent"
+      anchor="right"
+    >
+      <Toolbar>
+        <Typography variant="h6" noWrap component="div">
+          Statistic
+        </Typography>
+      </Toolbar>
+      <TokenCounterAccordian />
+      <Divider />
+      <Divider />
+    </Drawer>
   );
 };
