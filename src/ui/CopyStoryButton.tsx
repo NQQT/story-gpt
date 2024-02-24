@@ -1,6 +1,6 @@
 import React from 'react';
 import { Button } from '@mui/material';
-import { database } from '../database';
+import { database } from '../context';
 
 export const CopyStoryButton = React.memo(() => {
   const buttonProps: React.ComponentProps<typeof Button> = {
@@ -11,7 +11,7 @@ export const CopyStoryButton = React.memo(() => {
         console.log('done');
       });
     },
-    children: 'Save',
+    children: 'Save'
   };
 
   return <Button {...buttonProps} />;

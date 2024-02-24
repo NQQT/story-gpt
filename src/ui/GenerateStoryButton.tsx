@@ -1,6 +1,6 @@
 import { Button } from '@mui/material';
 import React from 'react';
-import { database } from '../database';
+import { database } from '../context';
 import { DeepAI } from '../service/DeepAI';
 import { PRESET_INSTRUCT_ALTERNATE, PRESET_INSTRUCT_START, PRESET_STYLE_IGNORED } from '../presets';
 
@@ -13,7 +13,7 @@ export const GenerateStoryButton = React.memo(() => {
       // Setting the initial configuration
       deepAI.append(
         PRESET_STYLE_IGNORED,
-        PRESET_INSTRUCT_ALTERNATE,
+        PRESET_INSTRUCT_ALTERNATE
         // PRESET_ACTOR_BOYS,
         // PRESET_INSTRUCT_IGNORED
       );
@@ -62,7 +62,7 @@ export const GenerateStoryButton = React.memo(() => {
       database.processing = !database.processing;
       start();
     },
-    children: !database.processing ? 'Start' : 'stop',
+    children: !database.processing ? 'Start' : 'stop'
   };
   return <Button {...buttonProps} />;
 });
@@ -83,7 +83,7 @@ const getTruncatedStory = () => {
   const story = [...database.record.story];
   let counter = 0;
   // Get the filtered story
-  const truncatedStory = story.reverse().filter((entry) => {
+  const truncatedStory: any[] = story.reverse().filter((entry: any) => {
     const valid = counter < maxLength;
     counter += entry.length;
     return valid;

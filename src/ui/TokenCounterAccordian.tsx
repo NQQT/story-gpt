@@ -1,17 +1,17 @@
 import React from 'react';
 import { AccordianDrawerMenu } from '@common/assets';
-import { database } from '../database';
+import { database } from '../context';
 
 export const TokenCounterAccordian = () => {
   const {
     record: {
-      counter: { token },
-    },
+      counter: { token }
+    }
   } = database();
 
   const props: any = {
     name: 'Token',
-    value: token,
+    value: token
   };
   return <AccordianDrawerMenu {...props} />;
 };

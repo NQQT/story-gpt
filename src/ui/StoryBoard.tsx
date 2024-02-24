@@ -1,4 +1,4 @@
-import { database } from '../database';
+import { database } from '../context';
 import { IconButton, TextField } from '@mui/material';
 import React, { useEffect, useState } from 'react';
 import { makeStyles } from '@mui/styles';
@@ -6,7 +6,7 @@ import ClearIcon from '@mui/icons-material/Clear';
 
 export const StoryBoard = React.memo(() => {
   const {
-    record: { story },
+    record: { story }
   } = database();
   return (
     <>
@@ -30,23 +30,23 @@ export const StoryBoard = React.memo(() => {
 const useStyles = makeStyles(() => ({
   root: {
     '& .MuiTextField-root': {
-      width: '25ch',
+      width: '25ch'
     },
     '& .MuiOutlinedInput-root': {
-      position: 'relative',
+      position: 'relative'
     },
     '& .MuiIconButton-root': {
       position: 'absolute',
       top: 0,
-      right: 0,
-    },
-  },
+      right: 0
+    }
+  }
 }));
 
 const TextModificationArea: React.FC<{ value: string; update: (value: string) => void; remove: () => void }> = ({
   value,
   update,
-  remove,
+  remove
 }) => {
   const { root } = useStyles();
   const [state, setState] = useState(value);
@@ -73,7 +73,7 @@ const TextModificationArea: React.FC<{ value: string; update: (value: string) =>
           <IconButton onClick={remove}>
             <ClearIcon />
           </IconButton>
-        ),
+        )
       }}
       fullWidth
     />

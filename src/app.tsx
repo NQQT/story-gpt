@@ -1,12 +1,12 @@
 import React from 'react';
 import { AppBar, Box, CssBaseline, Divider, Drawer, Toolbar, Typography } from '@mui/material';
-import { database } from './database';
+import { database } from './context';
 import { TokenCounterAccordian } from './ui/TokenCounterAccordian';
 import { StorySummaryTextField } from './ui/StorySummaryTextField';
-import { GenerateStoryButton } from './ui/GenerateStoryButton';
 import { StoryBoard } from './ui/StoryBoard';
 import { StoryInstructionTextField } from './ui/StoryInstructionTextField';
 import { CopyStoryButton } from './ui/CopyStoryButton';
+import { GeminiStoryButton } from './ui/GeminiStoryButton';
 
 const drawerWidth = 400;
 export const StoryGPTMain = () => {
@@ -31,7 +31,7 @@ export const StoryGPTMain = () => {
           <StoryInstructionTextField />
           <Box>
             <CopyStoryButton />
-            <GenerateStoryButton />
+            <GeminiStoryButton />
           </Box>
         </Box>
       </Box>
@@ -47,8 +47,8 @@ export const DrawerItem = () => {
         flexShrink: 0,
         '& .MuiDrawer-paper': {
           width: drawerWidth,
-          boxSizing: 'border-box',
-        },
+          boxSizing: 'border-box'
+        }
       }}
       variant="permanent"
       anchor="right"
