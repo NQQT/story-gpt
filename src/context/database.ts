@@ -23,7 +23,7 @@ type Structure = {
 export const database = createDataState<Structure>({
   configs: {
     // Recalling API after Segment of 1000.
-    segmentLength: 1500
+    segmentLength: 1000
   },
   record: {
     story: [],

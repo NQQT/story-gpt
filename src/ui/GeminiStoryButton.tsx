@@ -27,10 +27,7 @@ export const GeminiStoryButton = React.memo(() => {
 
         const chat = model.startChat({
           generationConfig: {
-            maxOutputTokens: 1000,
-            temperature: 1.0,
-            topP: 0.8,
-            topK: 10
+            maxOutputTokens: 1000
           },
           safetySettings: [
             { category: HarmCategory.HARM_CATEGORY_HARASSMENT, threshold: HarmBlockThreshold.BLOCK_NONE },
@@ -42,19 +39,38 @@ export const GeminiStoryButton = React.memo(() => {
 
         const msg = storySoFar.join('\n');
 
-        const result = await chat.sendMessage(msg);
-        database.record.story.push(result.response.text().trim());
-        database.processing = false;
+        console.log('payload', msg);
 
-        return;
-        // const result = await chat.sendMessageStream(storySoFar.join('\n'));
-        // let length = 0;
-        // for await (const chunk of result.stream) {
-        //   const chunkText = chunk.text();
-        //   console.log(chunkText);
-        //   length += chunkText.length;
-        // }
-        // console.log('done', length);
+        // const result = await chat.sendMessage(msg);
+        // database.record.story.push(result.response.text().trim());
+        // database.processing = false;
+        //
+        // return;
+        const result = await chat.sendMessageStream(msg);
+        // Get the Story Index
+        const index = database.record.story.length;
+        // Creating a new value
+        database.record.story.push('');
+        for await (const chunk of result.stream) {
+          // Getting the text
+          const text = chunk.text();
+          database.record.story[index] += text;
+          // Causing a Refresh
+          database.record.story = [...database.record.story];
+
+          // Automatically break.
+          if (validEndingString(text.trim())) {
+            // Checking if the segmenth length has been reached
+            if (database.record.story[index].length > database.configs.segmentLength) {
+              console.log('stopping');
+              break;
+            }
+          }
+        }
+
+        // database.processing = false;
+        // Repeat Until Stop.
+        setTimeout(() => start(), 50);
       };
 
       run();
@@ -71,6 +87,17 @@ export const GeminiStoryButton = React.memo(() => {
   };
   return <Button {...buttonProps} />;
 });
+
+const validEndingString = (text: string) => {
+  if (text.indexOf('\n') > 0) {
+    const trimmed = text.trim();
+    if (['"', '.'].includes(trimmed[trimmed.length - 1])) {
+      // Ending must be a full stop
+      return true;
+    }
+  }
+  return false;
+};
 
 const getTruncatedStory = () => {
   const maxLength = 20000;
